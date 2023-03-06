@@ -1,7 +1,34 @@
 doctype html
-html
+html(lang="en")
   head
+    meta(charset="utf-8")
+    meta(
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    )
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/dist/reset.css')
+    link(rel='stylesheet', href='/dist/reveal.css')
+    link(rel='stylesheet', href='/dist/theme/moon.css', id='theme')
+    link(rel='stylesheet', href='/plugin/highlight/monokai.css')
+    link(rel='stylesheet', href='/plugin/pointer/pointer.css')
+    link(rel='stylesheet', href='/plugin/drawer/drawer.css')
+
   body
-    block content
+    div(class='reveal')
+      div(class='slides')
+        section
+          h1= title
+          button(id='shuffle', onclick='shuffle()') shuffle
+          div(id='test')
+        section(data-query-deck='ch=textbook/ch&wb=work_book/wb')
+
+    script(src='/dist/reveal.js')
+    script(src='/plugin/math/math.js')
+    script(src='/plugin/notes/notes.js')
+    script(src='/plugin/highlight/highlight.js')
+    script(src='/plugin/pointer/pointer.js')
+    script(src='/plugin/drawer/drawer.js')
+    script(src='/plugin/menu/menu.js')
+    script(defer, src='/dist/index.js')
+
