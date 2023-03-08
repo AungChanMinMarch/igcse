@@ -23,105 +23,96 @@ const pointerConfig = {
     tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
 }
 const menuConfig = {
-    side: 'left',
-    width: 'full',
+    side: 'left', //left or right
+    width: 'wide',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
     numbers: "true",
     titleSelector: 'h1, h2, h3, h4, h5, h6',
     useTextContentForMissingTitles: false,
-
-    // Hide slides from the menu that do not have a title.
-    // Set to 'true' to only list slides with titles.
     hideMissingTitles: 'true',
 
     // Adds markers to the slide titles to indicate the
     // progress through the presentation. Set to 'false'
     // to hide the markers.
     markers: false,
-
-    // Specifies the themes that will be available in the themes
-    // menu panel. Set to 'true' to show the themes menu panel
-    // with the default themes list. Alternatively, provide an
-    // array to specify the themes to make available in the
-    // themes menu panel, for example...
-    //
-    // [
-    //     { name: 'Black', theme: 'dist/theme/black.css' },
-    //     { name: 'White', theme: 'dist/theme/white.css' },
-    //     { name: 'League', theme: 'dist/theme/league.css' },
-    //     {
-    //       name: 'Dark',
-    //       theme: 'lib/reveal.js/dist/theme/black.css',
-    //       highlightTheme: 'lib/reveal.js/plugin/highlight/monokai.css'
-    //     },
-    //     {
-    //       name: 'Code: Zenburn',
-    //       highlightTheme: 'lib/reveal.js/plugin/highlight/zenburn.css'
-    //     }
-    // ]
-    //
-    // Note: specifying highlightTheme without a theme will
-    // change the code highlight theme while leaving the
-    // presentation theme unchanged.
-    themes: true,
-
-    // Specifies the path to the default theme files. If your
-    // presentation uses a different path to the standard reveal
-    // layout then you need to provide this option, but only
-    // when 'themes' is set to 'true'. If you provide your own
-    // list of themes or 'themes' is set to 'false' the
-    // 'themesPath' option is ignored.
-    themesPath: 'dist/theme/',
-
-    // Specifies if the transitions menu panel will be shown.
-    // Set to 'true' to show the transitions menu panel with
-    // the default transitions list. Alternatively, provide an
-    // array to specify the transitions to make available in
-    // the transitions panel, for example...
-    // ['None', 'Fade', 'Slide']
+    themes: [
+        { name: 'Black', theme: '/dist/theme/black.css' },
+        { name: 'White', theme: '/dist/theme/white.css' },
+        { name: 'League', theme: '/dist/theme/league.css' },
+        {
+          name: 'Dark',
+          theme: '/dist/theme/black.css',
+          highlightTheme: '/plugin/highlight/monokai.css'
+        },
+        {
+          name: 'Code: Zenburn',
+          highlightTheme: '/plugin/highlight/zenburn.css'
+        }
+    ],
     transitions: true,
-
-    // Adds a menu button to the slides to open the menu panel.
-    // Set to 'false' to hide the button.
     openButton: true,
-
-    // If 'true' allows the slide number in the presentation to
-    // open the menu panel. The reveal.js slideNumber option must
-    // be displayed for this to take effect
     openSlideNumber: true,
-
-    // If true allows the user to open and navigate the menu using
-    // the keyboard. Standard keyboard interaction with reveal
-    // will be disabled while the menu is open.
     keyboard: true,
-
-    // Normally the menu will close on user actions such as
-    // selecting a menu item, or clicking the presentation area.
-    // If 'true', the sticky option will leave the menu open
-    // until it is explicitly closed, that is, using the close
-    // button or pressing the ESC or m key (when the keyboard
-    // interaction option is enabled).
     sticky: false,
-
-    // If 'true' standard menu items will be automatically opened
-    // when navigating using the keyboard. Note: this only takes
-    // effect when both the 'keyboard' and 'sticky' options are enabled.
     autoOpen: true,
-
-    // If 'true' the menu will not be created until it is explicitly
-    // requested by calling RevealMenu.init(). Note this will delay
-    // the creation of all menu panels, including custom panels, and
-    // the menu button.
     delayInit: false,
-
-    // If 'true' the menu will be shown when the menu is initialised.
     openOnInit: false,
-
-    // By default the menu will load it's own font-awesome library
-    // icons. If your presentation needs to load a different
-    // font-awesome library the 'loadIcons' option can be set to false
-    // and the menu will not attempt to load the font-awesome library.
-    loadIcons: true
-  }
+    loadIcons: true,
+    custom: [
+      {
+        title: '4.1',
+        icon: '<i class="fa fa-external-link">',
+        content: `<h1>Past papers</h1>
+<ul class="slide-menu-items">
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">Choice Questions</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">Short Questions</a>
+  </li>
+   <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">Practical Questions</a>
+  </li>
+</ul>
+<h2>Chapter 4</h2>
+<ul class="slide-menu-items">
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">4.1 Energy</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">4.2 Conservation of energy</a>
+  </li>
+</ul>`
+      },
+      {
+        title: 'Main Menu',
+        icon: '<i class="fa fa-info">',
+        content: `<h1>IGCSE PHYSICS</h1>
+<ul class="slide-menu-items">
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">1 Motion</a>
+    <ul class="slide-menu-items">
+      <li class="slide-menu-item">
+        <a href="https://github.com/denehyg/reveal.js-menu">1.1 making measurements</a>
+      </li>
+      <li class="slide-menu-item">
+        <a href="https://github.com/denehyg/reveal.js-menu">1.2 velocity</a>
+      </li>
+    </ul>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">2. Forces and their effects</a>
+  </li>
+   <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">3 Force in equilibrium</a>
+  </li>
+  </li>
+   <li class="slide-menu-item">
+    <a href="https://github.com/hakimel/reveal.js">4 Energy</a>
+  </li>
+</ul>`
+      }
+    ]
+}
 
 const drawerConfig = {
     toggleDrawKey: "d", // (optional) key to enable drawing, default "d"
@@ -150,7 +141,7 @@ const revealConfig = {
 	menu: menuConfig,
 	drawer: drawerConfig,
 	mathjax3: mathjax3Config, 
-	plugins: [ RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer ],
+	plugins: [ RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu ],
     dependencies: [
     	{
     		src: '/plugin/external/reveal_external.js', 
@@ -159,4 +150,4 @@ const revealConfig = {
     ]
 }
 
-Reveal.initialize(revealConfig) 
+Reveal.initialize(revealConfig)
