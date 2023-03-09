@@ -75,10 +75,31 @@ const menuConfig = {
 <h2>Chapter 4</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">4.1 Energy</a>
+    <a href="4.1">4.1 Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">4.2 Conservation of energy</a>
+    <a href="4.2">4.2 Conservation of energy</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.3">4.3 Fuel for Electricity</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.4">4.4 Nuclear Energy</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.5">4.5 Energy from the wind and water</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.6">4.6 Energy from the Sun and Earth</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.7">4.7 Energy and the environment</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.8">4.8 Energy and Work</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.9">4.9 Power</a>
   </li>
 </ul>`
       },
