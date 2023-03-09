@@ -23,7 +23,7 @@ const pointerConfig = {
 }
 const menuConfig = {
     side: 'left', //left or right
-    width: 'wide',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
+    width: '80%',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
     numbers: "true",
     titleSelector: 'h1, h2, h3, h4, h5, h6',
     useTextContentForMissingTitles: false,
@@ -58,7 +58,7 @@ const menuConfig = {
     loadIcons: true,
     custom: [
       {
-        title: '4.1',
+        title: '4',
         icon: '<i class="fa fa-external-link">',
         content: `<h1>Past papers</h1>
 <ul class="slide-menu-items">
@@ -75,10 +75,31 @@ const menuConfig = {
 <h2>Chapter 4</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">4.1 Energy</a>
+    <a href="4.1">4.1 Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">4.2 Conservation of energy</a>
+    <a href="4.2">4.2 Conservation of energy</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.3">4.3 Fuel for Electricity</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.4">4.4 Nuclear Energy</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.5">4.5 Energy from the wind and water</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.6">4.6 Energy from the Sun and Earth</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.7">4.7 Energy and the environment</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.8">4.8 Energy and Work</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="4.9">4.9 Power</a>
   </li>
 </ul>`
       },
@@ -109,7 +130,57 @@ const menuConfig = {
     <a href="https://github.com/hakimel/reveal.js">4 Energy</a>
   </li>
 </ul>`
+      },
+      {
+        title: 'Past Papers',
+        icon: '<i class="fa fa-info">',
+        content: `<h1>IGCSE PHYSICS</h1>
+        <h2>2022 Oct</h2>
+<ul class="slide-menu-items">
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">1 choice Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">2 choice Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">3 short Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">4 short Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">5 Practical Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">6 Practical Question</a>
+  </li>
+</ul>
+
+<h2>2022 May</h2>
+<ul class="slide-menu-items">
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">1 choice Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">2 choice Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">3 short Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">4 short Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">5 Practical Question</a>
+  </li>
+  <li class="slide-menu-item">
+    <a href="https://github.com/denehyg/reveal.js-menu">6 Practical Question</a>
+  </li>
+</ul>
+`
       }
+
     ]
 }
 
