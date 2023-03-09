@@ -994,7 +994,7 @@ const Plugin = () => {
         // add menu button
         var div = create('div', { class: 'slide-menu-button' });
         var link = create('a', { href: '#' });
-        link.appendChild(create('i', { class: 'fas fa-bars' }));
+        link.appendChild(create('i', { class: 'fa fa-bars' }));
         div.appendChild(link);
         select('.reveal').appendChild(div);
         div.onclick = openMenu;
