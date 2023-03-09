@@ -1,8 +1,7 @@
 function shuffle(){
-    document.getElementById('test').innerHTML = '<img src="/img/22March1_05.jpg">'
 	location.hash = "";
 
-	const slides = Array.from(document.querySelectorAll("section"));
+	const slides = Array.from(document.querySelectorAll(".slides > section"));
 
 	// Start from the element before last one and swap
 	// beacuse we don't want to move the first element that's why i > 0

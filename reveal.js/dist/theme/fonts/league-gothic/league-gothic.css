@@ -3,6 +3,7 @@
     src: url('./league-gothic.eot');
     src: url('./league-gothic.eot?#iefix') format('embedded-opentype'),
          url('./league-gothic.woff') format('woff'),
+         url("//db.onlinewebfonts.com/t/3bae817a3ffed7db86b763dd7d8004b2.woff2") format("woff2")
          url('./league-gothic.ttf') format('truetype');
 
     font-weight: normal;
