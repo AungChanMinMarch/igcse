@@ -36,6 +36,37 @@
 	font-weight: inherit;
 }
 
+.reveal .slides .scrollable-slide {
+    height: 625px;
+    overflow-y: auto !important;
+    font-size: 0.8em;
+}
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px var(--r-link-color-hover);
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--r-link-color-hover);
+}
+::-webkit-scrollbar-corner {
+  background-color: var(--r-link-color-hover);
+}
+.multiCol {
+    display: table;
+    table-layout: fixed; // don't fudge depending on content
+    width: 100%;
+    text-align: left; // matter of taste, makes imho sense
+    .col {
+        display: table-cell;
+        vertical-align: top;
+        width: 50%;
+        padding: 2% 0 2% 3%; // some vertical, and between columns
+        &:first-of-type { padding-left: 0; } // there's nothing before col1
+    }
+}
+
 /*********************************************
  * HEADERS
  *********************************************/
