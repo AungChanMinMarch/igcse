@@ -75,31 +75,31 @@ const menuConfig = {
 <h2>Chapter 4</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="4.1">4.1 Energy</a>
+    <a href="/physics/?ch=4.1">4.1 Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.2">4.2 Conservation of energy</a>
+    <a href="/physics/?ch=4.2">4.2 Conservation of energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.3">4.3 Fuel for Electricity</a>
+    <a href="/physics/?ch=4.3">4.3 Fuel for Electricity</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.4">4.4 Nuclear Energy</a>
+    <a href="/physics/?ch=4.4">4.4 Nuclear Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.5">4.5 Energy from the wind and water</a>
+    <a href="/physics/?ch=4.5">4.5 Energy from the wind and water</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.6">4.6 Energy from the Sun and Earth</a>
+    <a href="/physics/?ch=4.6">4.6 Energy from the Sun and Earth</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.7">4.7 Energy and the environment</a>
+    <a href="/physics/?ch=4.7">4.7 Energy and the environment</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.8">4.8 Energy and Work</a>
+    <a href="/physics/?ch=4.8">4.8 Energy and Work</a>
   </li>
   <li class="slide-menu-item">
-    <a href="4.9">4.9 Power</a>
+    <a href="/physics/?ch=4.9">4.9 Power</a>
   </li>
 </ul>`
       },
@@ -214,10 +214,29 @@ const revealConfig = {
 	plugins: [ RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu ],
     dependencies: [
     	{
-    		src: '/plugin/external/reveal_external.js', 
-    		condition: function() { return !!document.querySelector('[data-external-replace], [data-external]'); } 
+    		src: '/plugin/external/deck_from_params.js', 
+    		// condition: function() { return !!document.querySelector('[data-external-replace], [data-external]'); } 
     	}
     ]
 }
 
 Reveal.initialize(revealConfig)
+
+function resetSlideScrolling(slide) {
+    slide?.classList.remove('scrollable-slide');
+}
+
+function handleSlideScrolling(slide) {
+    if (slide.clientHeight >= 800) {
+        slide.classList.add('scrollable-slide');
+    }
+}
+
+Reveal.addEventListener('ready', function (event) {
+    handleSlideScrolling(event.currentSlide);
+});
+
+Reveal.addEventListener('slidechanged', function (event) {
+    resetSlideScrolling(event.previousSlide)
+    handleSlideScrolling(event.currentSlide);
+});
