@@ -1,2 +1,7 @@
-h1= title
-p Welcome to #{title}
+extends layout.pug
+
+block content
+	section
+		h1= title
+		button(id='shuffle', onclick='shuffle()') shuffle
+	section(data-query-deck='ch=textbook/ch&wb=work_book/wb')

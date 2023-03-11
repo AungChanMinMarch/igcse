@@ -10,7 +10,8 @@ function serveHTML(fileName){
 router.use('/textbook/ch04/', express.static(path.resolve(__dirname, '../views')));
 
 router.get('/', function(req, res) {
-  res.render('layout', {title: 'IGCSE PHYSICS'});
+  const obj = [{txt: 'hi'}, {txt: 'world'}];
+  res.render('layout', {title: 'IGCSE PHYSICS', obj: obj});
 });
 
 module.exports = router;

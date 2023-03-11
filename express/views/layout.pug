@@ -17,11 +17,7 @@ html(lang="en")
   body
     div(class='reveal')
       div(class='slides')
-        section
-          h1= title
-          button(id='shuffle', onclick='shuffle()') shuffle
-          div(id='test')
-        section(data-query-deck='ch=textbook/ch&wb=work_book/wb')
+        block content
 
     script(src='/dist/reveal.js')
     script(src='/plugin/math/math.js')
