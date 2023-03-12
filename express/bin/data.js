@@ -12,13 +12,20 @@ const ChoiceQuestion = require("../models/choiceQuestion.js");
 mongoose.connect(uri).then(()=>{
     log("connected to MongoDB");
     ChoiceQuestion.find({}).then(function(questions){
-        let file = '';
+        let formattedHtml = '';
         for (let i = 0, len = questions.length; i < len; i++) {
             const question = questions[i];
             const html = `<section> ${question.q} </section>           `;
-            file += html
+            formattedHtml += html;
+            try {
+                formattedHtml += prettier.format(html, { parser: 'html' });
+            }catch{
+                formattedHtml += html
+            }finally{
+                formattedHtml += '\n';
+            }
         }
-        fs.writeFile('express/views/temp.html', file, function(err){
+        fs.writeFile('express/views/temp.html', formattedHtml, function(err){
             if(err){ 
                 return log(err);
             }
@@ -26,4 +33,3 @@ mongoose.connect(uri).then(()=>{
         });
     })
 });
-
