@@ -26,7 +26,7 @@ for (let i = 0; i < args.length; i++) {
         warn(`${arg} is not valid argument!! continuing the next one!!!`)
         continue;
     }
-    if(validKeys.i ncludes(name)){
+    if(validKeys.includes(name)){
         log(`${arg} is valid. Working on it.`)
         configKey = name;
         configValue = value;
@@ -46,7 +46,7 @@ const prettier = require('prettier');
 
 const mongoose = require('mongoose');
 const ChoiceQuestion = require("../models/choiceQuestion.js");
-
+log('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
     log("connected to MongoDB");
     ChoiceQuestion.find({}).then(function(questions){
@@ -70,7 +70,38 @@ mongoose.connect(uri).then(()=>{
             if(err){ 
                 return log(err);
             }
-            log('written')
+            log('written');
+            const app = require('../app');
+            const http = require('http');           
+            const server = http.createServer(app);
+            const port = process.env.PORT;
+            server.listen(port, function () {
+                console.log(`Server is running on http://localhost:${port}`);
+                console.log(`please press s key and enter to save`);
+                console.log(`please press c key and enter to cancel`);
+                process.stdin.setEncoding('utf8');
+                process.stdin.on('data', (input) => {
+                    input = input.trim()
+                    if(input == 's'){
+                        saveToDB()
+                    }
+                    if(input == 'c'){
+                        cancel()
+                    }
+                    log('your input is ', input)
+                    console.log(`please press s key and enter to save`);
+                    console.log(`please press c key and enter to cancel`);
+                });
+            });
         });
     })
 });
+function saveToDB(){
+    log('saving');
+    process.exit(1); // terminate with exit code 1 (optional)
+}
+
+function cancel(){
+    log('canceling')
+    process.exit(1); // terminate with exit code 1 (optional)
+}
