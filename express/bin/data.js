@@ -43,6 +43,7 @@ const uri = process.env.DB_URI;
 
 const fs = require('fs');
 const prettier = require('prettier');
+const saveToDB = require('./data-save.js');
 
 const mongoose = require('mongoose');
 const ChoiceQuestion = require("../models/choiceQuestion.js");
@@ -96,11 +97,6 @@ mongoose.connect(uri).then(()=>{
         });
     })
 });
-function saveToDB(){
-    log('saving');
-    process.exit(1); // terminate with exit code 1 (optional)
-}
-
 function cancel(){
     log('canceling')
     process.exit(1); // terminate with exit code 1 (optional)
