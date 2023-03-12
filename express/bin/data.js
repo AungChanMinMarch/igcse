@@ -5,6 +5,7 @@ dotenv.config();
 const uri = process.env.DB_URI;
 
 const fs = require('fs');
+const prettier = require('prettier');
 
 const mongoose = require('mongoose');
 const ChoiceQuestion = require("../models/choiceQuestion.js");
