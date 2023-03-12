@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./express/bin/www",
-    "data": "node ./express/bin/data.js"
+    "data": "node ./express/bin/data.js",
+    "data-help": "node ./express/bin/data-help.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

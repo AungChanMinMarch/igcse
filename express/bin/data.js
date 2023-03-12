@@ -16,6 +16,26 @@ if(args.length > 1){
     log('detecting more than one argument.')
     warn('Only the first valid argument will be executed!!!!')
 }
+let configKey, configValue;
+const validKeys = ['ch', 'qp'];
+// Parse the command line arguments into the config object
+for (let i = 0; i < args.length; i++) {
+    const arg = args[i];
+    const [name, value] = arg.split('=');
+    if(!value){ 
+        warn(`${arg} is not valid argument!! continuing the next one!!!`)
+        continue;
+    }
+    if(validKeys.i ncludes(name)){
+        log(`${arg} is valid. Working on it.`)
+        configKey = name;
+        configValue = value;
+        break;
+    }
+}
+if(!configKey || !configValue){
+    exit('please add one valid command line argument')
+}
 
 const dotenv = require("dotenv");
 dotenv.config();
