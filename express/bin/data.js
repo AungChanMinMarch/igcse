@@ -1,4 +1,21 @@
 const log = console.log;
+function exit(message){
+    log(message)
+    log('for more info run npm run data-help')
+    process.exit(1); // terminate with exit code 1 (optional)
+}
+function warn(warning){
+    console.warn('\x1b[31m', warning, '\x1b[0m');
+}
+
+const args = process.argv.slice(2); // slice the first two elements which are not arguments
+if(args.length === 0){
+    exit('please add a command line argument')
+}
+if(args.length > 1){
+    log('detecting more than one argument.')
+    warn('Only the first valid argument will be executed!!!!')
+}
 
 const dotenv = require("dotenv");
 dotenv.config();
@@ -6,7 +23,6 @@ const uri = process.env.DB_URI;
 
 const fs = require('fs');
 const prettier = require('prettier');
-                process.stdout.write(`\rformat success index-${index} \n`);
 
 const mongoose = require('mongoose');
 const ChoiceQuestion = require("../models/choiceQuestion.js");
@@ -15,10 +31,10 @@ mongoose.connect(uri).then(()=>{
     log("connected to MongoDB");
     ChoiceQuestion.find({}).then(function(questions){
         let formattedHtml = '';
-        for (let i = 0, len = questions.length; i < len; i++) {
-            const question = questions[i];
+        for (let index = 0, len = questions.length; index < len; index++) {
+            const question = questions[index];
             const html = `<section> ${question.q} </section>`;
-            
+
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
                 formattedHtml += prettier.format(html, { parser: 'html' });
