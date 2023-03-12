@@ -44,8 +44,9 @@ const uri = process.env.DB_URI;
 const fs = require('fs');
 const prettier = require('prettier');
 const saveToDB = require('./data-save.js');
-
 const mongoose = require('mongoose');
+const cheerio = require('cheerio');
+
 const ChoiceQuestion = require("../models/choiceQuestion.js");
 log('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
@@ -54,14 +55,17 @@ mongoose.connect(uri).then(()=>{
         let formattedHtml = '';
         for (let index = 0, len = questions.length; index < len; index++) {
             const question = questions[index];
-            const html = `<section> ${question.q} </section>`;
 
+            const html = question.q;
+            const $ = cheerio.load(html);
+            log(question.q)
+            $('section').attr('data-id', question._id.toString())
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
-                formattedHtml += prettier.format(html, { parser: 'html' });
+                formattedHtml += prettier.format($.html('section'), { parser: 'html' });
                 process.stdout.write(`\rformat success index-${index} \n`);
             }catch{
-                formattedHtml += html
+                formattedHtml += $.html('section');
                 process.stdout.write(`\rformat fail index-${index} \n`);
             }finally{
                 formattedHtml += '\n';
