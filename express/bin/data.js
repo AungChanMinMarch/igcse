@@ -6,6 +6,7 @@ const uri = process.env.DB_URI;
 
 const fs = require('fs');
 const prettier = require('prettier');
+                process.stdout.write(`\rformat success index-${index} \n`);
 
 const mongoose = require('mongoose');
 const ChoiceQuestion = require("../models/choiceQuestion.js");
@@ -16,12 +17,15 @@ mongoose.connect(uri).then(()=>{
         let formattedHtml = '';
         for (let i = 0, len = questions.length; i < len; i++) {
             const question = questions[i];
-            const html = `<section> ${question.q} </section>           `;
-            formattedHtml += html;
+            const html = `<section> ${question.q} </section>`;
+            
+            process.stdout.write(`formatting index -  ${index}...................`);
             try {
                 formattedHtml += prettier.format(html, { parser: 'html' });
+                process.stdout.write(`\rformat success index-${index} \n`);
             }catch{
                 formattedHtml += html
+                process.stdout.write(`\rformat fail index-${index} \n`);
             }finally{
                 formattedHtml += '\n';
             }
