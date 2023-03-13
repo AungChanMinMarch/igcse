@@ -41,24 +41,18 @@ mongoose.connect(uri).then(()=>{
                 return log(err);
             }
             log('written');
-            const app = require('../app');
-            const http = require('http');           
-            const server = http.createServer(app);
-            server.listen(port, function () {
-                console.log(`Server is running on http://localhost:${port}`);
-                loghow()
-                process.stdin.setEncoding('utf8');
-                process.stdin.on('data', (input) => {
-                    input = input.trim()
-                    if(input == 's'){
-                        saveToDB(myModel, searchObj);
-                    }
-                    if(input == 'c'){
-                        cancel()
-                    }
-                    loghow();
-                    log('your input is ', input);
-                });
+            loghow()
+            process.stdin.setEncoding('utf8');
+            process.stdin.on('data', (input) => {
+                input = input.trim()
+                if(input == 's'){
+                    saveToDB(myModel, searchObj);
+                }
+                if(input == 'c'){
+                    cancel()
+                }
+                loghow();
+                log('your input is ', input);
             });
         });
     })

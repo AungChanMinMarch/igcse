@@ -22,8 +22,14 @@ function saveToDB(myModel, searchObj){
                 content: minify($.html(el), {collapseWhitespace: true}),
                 number: num++
             })
-            promises.push(newDocs.save())
+            return promises.push(newDocs.save());
         }
+        $(el).removeAttr('data-id');
+        return promises.push(myModel.findByIdAndUpdate(
+            dataId,
+            {q: minify($.html(el), {collapseWhitespace: true}), number : num++},
+            {multi: true}
+        ));
     });   
 
     Promise.all(promises)
@@ -37,4 +43,4 @@ function saveToDB(myModel, searchObj){
             process.exit(1); // terminate with exit code 1 (optional)
         })
 }
-module.exports = saveToDB
+module.exports = saveToDB;
