@@ -1,17 +1,26 @@
 var express = require('express');
 var router = express.Router();
 const path = require('path');
-
-function serveHTML(fileName){
-  return function (req, res) {
-    res.sendFile(path.resolve(__dirname, `../views/${fileName}.html`));
-  }
-}
-router.use('/textbook/ch04/', express.static(path.resolve(__dirname, '../views')));
+const noteModel = require('../models/note.js');
 
 router.get('/', function(req, res) {
-  const obj = [{txt: 'hi'}, {txt: 'world'}];
-  res.render('layout', {title: 'IGCSE PHYSICS', obj: obj});
+  res.render('index', {title: 'IGCSE PHYSICS', documents: []});
 });
+
+router.get('/ch/:id', function(req, res){
+  const [chapter, subChapter, number] = req.params.id.split('.');
+  let searchObj = {chapter: Number.parseInt(chapter)};
+  if(!!subChapter){
+    searchObj.subChapter = Number.parseInt(subChapter);
+    if(!!number){
+      searchObj.number= Number.parseInt(number)
+    }
+  }
+  noteModel.find(searchObj).then(function(documents){
+    res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+  }).catch(function(err) {
+    console.log(err);
+  });
+})
 
 module.exports = router;
