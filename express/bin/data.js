@@ -12,9 +12,9 @@ const mongoose = require('mongoose');
 const cheerio = require('cheerio');
 
 const ChoiceQuestion = require("../models/choiceQuestion.js");
-log('connecting to MongoDB')
+process.stdout.write('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
-    log("connected to MongoDB");
+    process.stdout.write("\rconnected to MongoDB \n");
     ChoiceQuestion.find({}).then(function(questions){
         let formattedHtml = '';
         for (let index = 0, len = questions.length; index < len; index++) {
@@ -22,7 +22,6 @@ mongoose.connect(uri).then(()=>{
 
             const html = question.q;
             const $ = cheerio.load(html);
-            log(question.q)
             $('section').attr('data-id', question._id.toString())
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
