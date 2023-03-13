@@ -3,10 +3,9 @@ const cheerio = require('cheerio');
 const minify = require('html-minifier').minify;
 const mongoose = require('mongoose');
 
-const html = fs.readFileSync('express/views/temp.html', 'utf8');
-const $ = cheerio.load(html);
-
 function saveToDB(myModel, searchObj){
+    const html = fs.readFileSync('express/views/temp.html', 'utf8');
+    const $ = cheerio.load(html);
     const ObjectId = mongoose.Types.ObjectId;
     let promises = [];
     const sections = $('section:not(section > section)');
