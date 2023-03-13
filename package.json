@@ -3,15 +3,21 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./express/bin/www"
+    "start": "node ./express/bin/www",
+    "data": "node ./express/bin/data.js",
+    "data-help": "node ./express/bin/data-help.js"
   },
   "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.0.3",
     "express": "~4.16.1",
+    "html-minifier": "^4.0.0",
     "http-errors": "~1.6.3",
+    "mongoose": "^7.0.1",
     "morgan": "~1.9.1",
+    "prettier": "^2.8.4",
     "pug": "^3.0.2"
   }
 }

@@ -75,6 +75,44 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   font-weight: inherit;
 }
 
+.reveal .slides .scrollable-slide {
+  height: 625px;
+  overflow-y: auto !important;
+  font-size: 0.8em;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px var(--r-link-color-hover);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--r-link-color-hover);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: var(--r-link-color-hover);
+}
+
+.multiCol {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  text-align: left;
+}
+.multiCol .col {
+  display: table-cell;
+  vertical-align: top;
+  width: 50%;
+  padding: 2% 0 2% 3%;
+}
+.multiCol .col:first-of-type {
+  padding-left: 0;
+}
+
 /*********************************************
  * HEADERS
  *********************************************/
