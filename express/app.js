@@ -13,7 +13,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+// app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -21,10 +21,6 @@ app.use(cookieParser());
 app.use('/dist', express.static(path.join(__dirname, '../reveal.js/dist')));
 app.use('/plugin', express.static(path.join(__dirname, '../reveal.js/plugin')));
 app.use('/img', express.static(path.resolve(__dirname, '../img')));
-
-app.get('/', function(req, res) {
-  res.render('data');
-});
 
 app.use('/', indexRouter);
 app.use('/physics', physicsRouter);

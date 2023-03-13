@@ -21,6 +21,7 @@ const pointerConfig = {
     alwaysVisible: false, // should pointer mode be always visible? default "false"
     tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
 }
+const endpoint =location.pathname.split('/').pop();
 const menuConfig = {
     side: 'left', //left or right
     width: '80%',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
@@ -59,47 +60,47 @@ const menuConfig = {
     custom: [
       {
         title: '4',
-        icon: '<i class="fa fa-external-link">',
+        icon: '<i class="fa fa-link">',
         content: `<h1>Past papers</h1>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">Choice Questions</a>
+    <a href="/physics/cq/${endpoint}">Choice Questions</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">Short Questions</a>
+    <a href="/physics/sq/${endpoint}">Short Questions</a>
   </li>
    <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">Practical Questions</a>
+    <a href="/physics/pq/${endpoint}">Practical Questions</a>
   </li>
 </ul>
 <h2>Chapter 4</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.1">4.1 Energy</a>
+    <a href="/physics/ch/4.1">4.1 Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.2">4.2 Conservation of energy</a>
+    <a href="/physics/ch/4.2">4.2 Conservation of energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.3">4.3 Fuel for Electricity</a>
+    <a href="/physics/ch/4.3">4.3 Fuel for Electricity</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.4">4.4 Nuclear Energy</a>
+    <a href="/physics/ch/4.4">4.4 Nuclear Energy</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.5">4.5 Energy from the wind and water</a>
+    <a href="/physics/ch/4.5">4.5 Energy from the wind and water</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.6">4.6 Energy from the Sun and Earth</a>
+    <a href="/physics/ch/4.6">4.6 Energy from the Sun and Earth</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.7">4.7 Energy and the environment</a>
+    <a href="/physics/ch/4.7">4.7 Energy and the environment</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.8">4.8 Energy and Work</a>
+    <a href="/physics/ch/4.8">4.8 Energy and Work</a>
   </li>
   <li class="slide-menu-item">
-    <a href="/physics/?ch=4.9">4.9 Power</a>
+    <a href="/physics/ch/4.9">4.9 Power</a>
   </li>
 </ul>`
       },
@@ -109,25 +110,25 @@ const menuConfig = {
         content: `<h1>IGCSE PHYSICS</h1>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">1 Motion</a>
+    <a href="/physics/ch/1">1 Motion</a>
     <ul class="slide-menu-items">
       <li class="slide-menu-item">
-        <a href="https://github.com/denehyg/reveal.js-menu">1.1 making measurements</a>
+        <a href="/physics/ch/1.1">1.1 making measurements</a>
       </li>
       <li class="slide-menu-item">
-        <a href="https://github.com/denehyg/reveal.js-menu">1.2 velocity</a>
+        <a href="/physics/ch/1.2">1.2 velocity</a>
       </li>
     </ul>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">2. Forces and their effects</a>
+    <a href="/physics/ch/2">2. Forces and their effects</a>
   </li>
    <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">3 Force in equilibrium</a>
+    <a href="/physics/ch/3">3 Force in equilibrium</a>
   </li>
   </li>
    <li class="slide-menu-item">
-    <a href="https://github.com/hakimel/reveal.js">4 Energy</a>
+    <a href="/physics/ch/4">4 Energy</a>
   </li>
 </ul>`
       },
@@ -138,44 +139,44 @@ const menuConfig = {
         <h2>2022 Oct</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">1 choice Question</a>
+    <a href="/physics/igcse/2022oct1">1 choice Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">2 choice Question</a>
+    <a href="/physics/igcse/2022oct2">2 choice Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">3 short Question</a>
+    <a href="/physics/igcse/2022oct3">3 short Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">4 short Question</a>
+    <a href="/physics/igcse/2022oct4">4 short Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">5 Practical Question</a>
+    <a href="/physics/igcse/2022oct5">5 Practical Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">6 Practical Question</a>
+    <a href="/physics/igcse/2022oct6">6 Practical Question</a>
   </li>
 </ul>
 
 <h2>2022 May</h2>
 <ul class="slide-menu-items">
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">1 choice Question</a>
+    <a href="/physics/igcse/2022may1">1 choice Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">2 choice Question</a>
+    <a href="/physics/igcse/2022may2">2 choice Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">3 short Question</a>
+    <a href="/physics/igcse/2022may3">3 short Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">4 short Question</a>
+    <a href="/physics/igcse/2022may4">4 short Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">5 Practical Question</a>
+    <a href="/physics/igcse/2022may5">5 Practical Question</a>
   </li>
   <li class="slide-menu-item">
-    <a href="https://github.com/denehyg/reveal.js-menu">6 Practical Question</a>
+    <a href="/physics/igcse/2022may6">6 Practical Question</a>
   </li>
 </ul>
 `
