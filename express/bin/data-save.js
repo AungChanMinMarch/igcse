@@ -13,15 +13,10 @@ function saveToDB(myModel, searchObj){
     let num = 0;
     sections.each((i, el) => {
         const dataId = $(el).attr('data-id');
-        if(!!dataId){
-            $(el).removeAttr('data-id');
-            promises.push(myModel.findByIdAndUpdate(
-                dataId,
-                {q: minify($.html(el), {collapseWhitespace: true}), number : num++},
-                {multi: true}
-            ));
-            return;
-        }else{
+        if(!!dataId && $(el).attr('data-action') === 'delete'){
+            return promises.push(myModel.findByIdAndRemove(dataId))
+        }
+        if(!dataId){
             const newDocs = new myModel({
                 ...searchObj,
                 content: minify($.html(el), {collapseWhitespace: true}),

@@ -21,7 +21,9 @@ app.use(cookieParser());
 app.use('/dist', express.static(path.join(__dirname, '../reveal.js/dist')));
 app.use('/plugin', express.static(path.join(__dirname, '../reveal.js/plugin')));
 app.use('/img', express.static(path.resolve(__dirname, '../img')));
-
+app.get('/', function(req, res) {
+  res.render('data', {title: 'IGCSE PHYSICS'});
+});
 app.use('/', indexRouter);
 app.use('/physics', physicsRouter);
 
