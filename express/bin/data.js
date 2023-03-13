@@ -4,12 +4,14 @@ const {configKey, configValue} = require('./data-validate.js')
 const dotenv = require("dotenv");
 dotenv.config();
 const uri = process.env.DB_URI;
+const port = process.env.PORT;
 
 const fs = require('fs');
 const prettier = require('prettier');
-const saveToDB = require('./data-save.js');
 const mongoose = require('mongoose');
 const cheerio = require('cheerio');
+
+const saveToDB = require('./data-save.js');
 
 process.stdout.write('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
@@ -30,7 +32,7 @@ mongoose.connect(uri).then(()=>{
         for (let index = 0, len = questions.length; index < len; index++) {
             const question = questions[index];
 
-            const html = question.q;
+            const html = question.q || '';
             const $ = cheerio.load(html);
             $('section').attr('data-id', question._id.toString())
             process.stdout.write(`formatting index -  ${index}...................`);
@@ -52,11 +54,9 @@ mongoose.connect(uri).then(()=>{
             const app = require('../app');
             const http = require('http');           
             const server = http.createServer(app);
-            const port = process.env.PORT;
             server.listen(port, function () {
                 console.log(`Server is running on http://localhost:${port}`);
-                console.log(`please press s key and enter to save`);
-                console.log(`please press c key and enter to cancel`);
+                loghow()
                 process.stdin.setEncoding('utf8');
                 process.stdin.on('data', (input) => {
                     input = input.trim()
@@ -66,14 +66,18 @@ mongoose.connect(uri).then(()=>{
                     if(input == 'c'){
                         cancel()
                     }
-                    log('your input is ', input)
-                    console.log(`please press s key and enter to save`);
-                    console.log(`please press c key and enter to cancel`);
+                    loghow();
+                    log('your input is ', input);
                 });
             });
         });
     })
 });
+
+function loghow(){
+    console.log(`please press s key and enter to save`);
+    console.log(`please press c key and enter to cancel`);
+}
 function cancel(){
     log('canceling')
     process.exit(1); // terminate with exit code 1 (optional)
