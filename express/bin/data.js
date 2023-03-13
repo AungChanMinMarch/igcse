@@ -24,7 +24,7 @@ mongoose.connect(uri).then(()=>{
 
             const html = docs.content || '';
             const $ = cheerio.load(html);
-            $('section').attr('data-id', docs._id.toString())
+            $('section:not(section > section)').attr('data-id', docs._id.toString())
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
                 formattedHtml += prettier.format($.html('section'), { parser: 'html' });

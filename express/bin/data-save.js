@@ -9,7 +9,7 @@ const $ = cheerio.load(html);
 function saveToDB(myModel, searchObj){
     const ObjectId = mongoose.Types.ObjectId;
     let promises = [];
-    const sections = $('section');
+    const sections = $('section:not(section > section)');
     let num = 0;
     sections.each((i, el) => {
         const dataId = $(el).attr('data-id');
