@@ -13,9 +13,8 @@ const choice_questionSchema = new Schema({
 		required: true,
 		min: [1, 'subchapter must be at least 1, got {VALUE}']
 	},
-	keypoint: {
+	noteNumber: {
 		type: Number,
-		default: 999,
 		required: true
 	},
 	qp: [{ //question paper e.g. 22march1

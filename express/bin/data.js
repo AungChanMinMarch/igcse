@@ -16,25 +16,15 @@ const saveToDB = require('./data-save.js');
 process.stdout.write('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
     process.stdout.write("\rconnected to MongoDB \n");
-    let myModel; 
-    if(configKey === 'ch'){
-        myModel = require('../models/note.js');
-    }else if(configKey === 'qp'){
-        //check which paper here
-        //currently only choice paper exist
-        myModel= require('../models/choiceQuestion.js');
-    }
-    if(!myModel){ //this may not be needed we have check in data-validate.js
-        process.exit(1); // terminate with exit code 1 (optional)
-    }
-    myModel.find({}).then(function(questions){
+    const [myModel, searchObj] = processConfig();
+    myModel.find(searchObj).then(function(documents){
         let formattedHtml = '';
-        for (let index = 0, len = questions.length; index < len; index++) {
-            const question = questions[index];
+        for (let index = 0, len = documents.length; index < len; index++) {
+            const docs = documents[index];
 
-            const html = question.q || '';
+            const html = docs.content || '';
             const $ = cheerio.load(html);
-            $('section').attr('data-id', question._id.toString())
+            $('section').attr('data-id', docs._id.toString())
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
                 formattedHtml += prettier.format($.html('section'), { parser: 'html' });
@@ -61,7 +51,7 @@ mongoose.connect(uri).then(()=>{
                 process.stdin.on('data', (input) => {
                     input = input.trim()
                     if(input == 's'){
-                        saveToDB()
+                        saveToDB(myModel, searchObj);
                     }
                     if(input == 'c'){
                         cancel()
@@ -81,4 +71,30 @@ function loghow(){
 function cancel(){
     log('canceling')
     process.exit(1); // terminate with exit code 1 (optional)
+}
+function processConfig(){
+    let myModel; 
+    let searchObj = {};
+    if(configKey === 'ch'){
+        myModel = require('../models/note.js');
+        const [chapter, subChapter, number] = configValue.split('.');
+        searchObj.chapter = Number.parseInt(chapter);
+        if(!!subChapter){
+            searchObj.subChapter = Number.parseInt(subChapter);
+            if(!!number) searchObj.number = Number.parseInt(number);
+        }
+    }else if(configKey === 'qp'){
+        //check which paper here
+        //currently only choice paper exist
+        let paperNumber = configKey.charAt(configKey.length - 1); // get the last character using the charAt() method
+        if(paperNumber == 1 || paperNumber ==2){
+            myModel= require('../models/choiceQuestion.js');
+            searchObj = { qp: configValue};
+        }
+
+    }
+    if(!myModel){ //this may not be needed we have check in data-validate.js
+        process.exit(1); // terminate with exit code 1 (optional)
+    }
+    return [myModel, searchObj]
 }

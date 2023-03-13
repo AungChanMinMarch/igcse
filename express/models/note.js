@@ -13,12 +13,12 @@ const noteSchema = new Schema({
 		required: true,
 		min: [1, 'subchapter must be at least 1, got {VALUE}']
 	},
-	keypoint: {
+	number: {
 		type: Number, // order to show
 		required: true
 	},
-	note: {
+	content: {
 		type: String,
 	}
 });
-module.exports = mongoose.model("lectureNote", noteSchema);
+module.exports = mongoose.model("lectureNotes", noteSchema);
