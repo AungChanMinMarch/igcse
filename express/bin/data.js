@@ -11,11 +11,21 @@ const saveToDB = require('./data-save.js');
 const mongoose = require('mongoose');
 const cheerio = require('cheerio');
 
-const ChoiceQuestion = require("../models/choiceQuestion.js");
 process.stdout.write('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
     process.stdout.write("\rconnected to MongoDB \n");
-    ChoiceQuestion.find({}).then(function(questions){
+    let myModel; 
+    if(configKey === 'ch'){
+        myModel = require('../models/note.js');
+    }else if(configKey === 'qp'){
+        //check which paper here
+        //currently only choice paper exist
+        myModel= require('../models/choiceQuestion.js');
+    }
+    if(!myModel){ //this may not be needed we have check in data-validate.js
+        process.exit(1); // terminate with exit code 1 (optional)
+    }
+    myModel.find({}).then(function(questions){
         let formattedHtml = '';
         for (let index = 0, len = questions.length; index < len; index++) {
             const question = questions[index];
