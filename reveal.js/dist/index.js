@@ -13,6 +13,125 @@ function shuffle(){
 		slides[i-1].after(slides[j])
 	}
 }
+const indexJSON = [{
+  '1.0': 'Motions',
+  '1.1': 'Making measurements',
+  '1.2': 'Distance-time graphs',
+  '1.3': 'More about speed',
+  '1.4': 'Acceleration',
+  '1.5': 'More about acceleration',
+  '1.6': 'Free fall'
+},{
+  '2.0': 'Forces and their effects',
+  '2.1':'Mass and weight',
+  '2.2':'Density',
+  '2.3':'Force and shape',
+  '2.4':'Force and motion',
+  '2.5':'More about force and motion',
+  '2.6':'Momentum',
+  '2.7':'Explosions',
+  '2.8': 'Impact forces'
+},{
+  '3.0': 'Forces in equilibrium',
+  '3.1': 'Moments',
+  '3.2': 'Moments in balance',
+  '3.3': 'The Principle of Moments',
+  '3.4': 'Centre of gravity',
+  '3.5': 'Stability',
+  '3.6': 'More about vectors'
+},{
+  '4.0': 'Energy',
+  '4.1': 'Energy transfers',
+  '4.2': 'Conservation of energy',
+  '4.3': 'Fuel for electricity',
+  '4.4': 'Nuclear energy',
+  '4.5': 'Energy from wind and water',
+  '4.6': 'Energy from the Sun and the Earth',
+  '4.7': 'Energy and the environment',
+  '4.8': 'Energy and work',
+  '4.9': 'Power'
+},{
+  '5.0': 'Pressure',
+  '5.1': 'Under pressure',
+  '5.2': 'Pressure at work',
+  '5.3': 'Pressure in a liquid at rest',
+  '5.4': 'Solids, liquids and gases',
+  '5.5': 'More about solids, liquids and gases',
+  '5.6': 'Gas pressure and temperature',
+  '5.7': 'Evaporation',
+  '5.8': 'Gas pressure and volume',
+},{
+  '6.0': 'Thermal physics',
+  '6.1': 'Thermal expansion',
+  '6.2': 'Thermometers',
+  '6.3': 'Specific heat capacity',
+  '6.4': 'Change of state',
+  '6.5': 'Thermal conduction',
+  '6.6': 'Convection',
+  '6.7': 'Infrared radiation',
+  '6.8': 'More about infrared radiation',
+  '6.9': 'Thermal energy at work'
+}]
+const endpoint =location.pathname.split('/').pop();
+function buildChapterMenu() {
+  const chapter = endpoint.split('.')[0];
+  const chapterJSON = indexJSON[chapter-1];
+  let chapterMenu = {
+    title: `Chapter ${chapter}`,
+    icon: '<i class="fa fa-link">',
+    content: `
+      <h1>Past papers</h1>
+      <ul class="slide-menu-items">
+        <li class="slide-menu-item">
+          <a href="/physics/cq/${endpoint}">Choice Questions</a>
+        </li>
+        <li class="slide-menu-item">
+          <a href="/physics/sq/${endpoint}">Short Questions</a>
+        </li>
+         <li class="slide-menu-item">
+          <a href="/physics/pq/${endpoint}">Practical Questions</a>
+        </li>
+      </ul>
+      <h2>Chapter ${chapter} ${chapterJSON[`${chapter}.0`]}</h2>
+      <ul class="slide-menu-items">
+    `
+  }
+  for(let key in chapterJSON){
+    if(key.split('.')[1] == '0') continue;
+    chapterMenu.content += `
+      <li class="slide-menu-item">
+        <a href="/physics/ch/${key}">${key} ${chapterJSON[key]}</a>
+      </li>
+    `
+  }
+  chapterMenu.content += '</ul>' 
+  return chapterMenu;
+}
+function buildMainMenu(){
+  let mainMenu = {
+    title: 'Main Menu',
+    icon: '<i class="fa fa-info">',
+    content: '<h1>IGCSE PHYSICS</h1><ul class="slide-menu-items">'
+  }
+  indexJSON.map(function(chapterJSON, index){
+    mainMenu.content += `
+      <li class="slide-menu-item">
+        <h1><a href="/physics/ch/${index + 1}">${index + 1} ${chapterJSON[`${index + 1}.1`]}</a></h1>
+        <ul class="slide-menu-items">
+    `
+    for(let key in chapterJSON){
+      if(key.split('.')[1] == '0') continue;
+      mainMenu.content += `
+        <li class="slide-menu-item">
+          <a href="/physics/ch/${key}">${key} ${chapterJSON[key]}</a>
+        </li>
+      `
+    }
+    mainMenu.content += '</ul></li>' 
+  })
+  mainMenu.content += '</ul>';
+  return mainMenu;
+}
 const pointerConfig = {
     key: "q", // key to enable pointer, default "q", not case-sensitive
     color: "red", // color of a cursor, default "red" any valid CSS color
@@ -21,7 +140,6 @@ const pointerConfig = {
     alwaysVisible: false, // should pointer mode be always visible? default "false"
     tailLength: 10, // NOT IMPLEMENTED YET!!! how long the "tail" should be? default 10
 }
-const endpoint =location.pathname.split('/').pop();
 const menuConfig = {
     side: 'left', //left or right
     width: '80%',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
@@ -58,80 +176,8 @@ const menuConfig = {
     openOnInit: false,
     loadIcons: true,
     custom: [
-      {
-        title: '4',
-        icon: '<i class="fa fa-link">',
-        content: `<h1>Past papers</h1>
-<ul class="slide-menu-items">
-  <li class="slide-menu-item">
-    <a href="/physics/cq/${endpoint}">Choice Questions</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/sq/${endpoint}">Short Questions</a>
-  </li>
-   <li class="slide-menu-item">
-    <a href="/physics/pq/${endpoint}">Practical Questions</a>
-  </li>
-</ul>
-<h2>Chapter 4</h2>
-<ul class="slide-menu-items">
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.1">4.1 Energy</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.2">4.2 Conservation of energy</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.3">4.3 Fuel for Electricity</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.4">4.4 Nuclear Energy</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.5">4.5 Energy from the wind and water</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.6">4.6 Energy from the Sun and Earth</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.7">4.7 Energy and the environment</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.8">4.8 Energy and Work</a>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/4.9">4.9 Power</a>
-  </li>
-</ul>`
-      },
-      {
-        title: 'Main Menu',
-        icon: '<i class="fa fa-info">',
-        content: `<h1>IGCSE PHYSICS</h1>
-<ul class="slide-menu-items">
-  <li class="slide-menu-item">
-    <a href="/physics/ch/1">1 Motion</a>
-    <ul class="slide-menu-items">
-      <li class="slide-menu-item">
-        <a href="/physics/ch/1.1">1.1 making measurements</a>
-      </li>
-      <li class="slide-menu-item">
-        <a href="/physics/ch/1.2">1.2 velocity</a>
-      </li>
-    </ul>
-  </li>
-  <li class="slide-menu-item">
-    <a href="/physics/ch/2">2. Forces and their effects</a>
-  </li>
-   <li class="slide-menu-item">
-    <a href="/physics/ch/3">3 Force in equilibrium</a>
-  </li>
-  </li>
-   <li class="slide-menu-item">
-    <a href="/physics/ch/4">4 Energy</a>
-  </li>
-</ul>`
-      },
+      buildChapterMenu(),
+      buildMainMenu(),
       {
         title: 'Past Papers',
         icon: '<i class="fa fa-info">',
