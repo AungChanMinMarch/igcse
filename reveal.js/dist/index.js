@@ -14,6 +14,7 @@ function shuffle(){
 	}
 }
 const indexJSON = [{
+},{
   '1.0': 'Motions',
   '1.1': 'Making measurements',
   '1.2': 'Distance-time graphs',
@@ -75,7 +76,7 @@ const indexJSON = [{
 const endpoint =location.pathname.split('/').pop();
 function buildChapterMenu() {
   const chapter = endpoint.split('.')[0];
-  const chapterJSON = indexJSON[chapter-1];
+  const chapterJSON = indexJSON[chapter];
   let chapterMenu = {
     title: `Chapter ${chapter}`,
     icon: '<i class="fa fa-link">',
@@ -114,9 +115,10 @@ function buildMainMenu(){
     content: '<h1>IGCSE PHYSICS</h1><ul class="slide-menu-items">'
   }
   indexJSON.map(function(chapterJSON, index){
+    if(index === 0) return;
     mainMenu.content += `
       <li class="slide-menu-item">
-        <h1><a href="/physics/ch/${index + 1}">${index + 1} ${chapterJSON[`${index + 1}.1`]}</a></h1>
+        <h1><a href="/physics/ch/${index}">${index} ${chapterJSON[`${index}.1`]}</a></h1>
         <ul class="slide-menu-items">
     `
     for(let key in chapterJSON){
@@ -175,10 +177,13 @@ const menuConfig = {
     delayInit: false,
     openOnInit: false,
     loadIcons: true,
-    custom: [
-      buildChapterMenu(),
-      buildMainMenu(),
-      {
+    custom: []
+}
+if(['physics', 'ch', 'cq', 'sq', 'pq', 'qp'].includes(endpoint) === false){
+    menuConfig.custom.push(buildChapterMenu());
+}
+menuConfig.custom.push(buildMainMenu());
+menuConfig.custom.push({
         title: 'Past Papers',
         icon: '<i class="fa fa-info">',
         content: `<h1>IGCSE PHYSICS</h1>
@@ -226,11 +231,8 @@ const menuConfig = {
   </li>
 </ul>
 `
-      }
-
-    ]
-}
-
+});   
+console.log(menuConfig)
 const drawerConfig = {
     toggleDrawKey: "d", // (optional) key to enable drawing, default "d"
     toggleBoardKey: "t", // (optional) key to show drawing board, default "t"
