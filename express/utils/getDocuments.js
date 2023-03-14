@@ -3,7 +3,10 @@ const choiceQuestionModel = require('../models/choiceQuestion.js');
 const shortQuestionModel = require('../models/shortQuestion.js');
 const practicalQuestionModel = require('../models/practicalQuestion.js');
 
-function getSearchObj(searchStr) {
+function getSearchObj(modelName, searchStr) {
+	if(modelName === 'qp'){
+		return {qp : {$in : [searchStr]}}
+	}
 	if(searchStr === ''){
 		return {};
 	}
@@ -18,13 +21,13 @@ function getSearchObj(searchStr) {
     return searchObj
 }
 
-function getModel(modelName, questionPaper){
+function getModel(modelName, searchStr){
 	if(modelName === 'ch') return noteModel;
 	if(modelName === 'cq') return choiceQuestionModel;
 	if(modelName === 'sq') return shortQuestionModel;
 	if(modelName === 'pq') return practicalQuestionModel;
 	if(modelName === 'qp'){
-  		const paperNumber = questionPaper[questionPaper.length -1];
+  		const paperNumber = searchStr[searchStr.length -1];
 		if(paperNumber == '1' || paperNumber == '2'){
 		 return choiceQuestionModel;
 		}
@@ -38,7 +41,7 @@ function getModel(modelName, questionPaper){
 }
 async function getDocuments(modelName, searchStr){
 	const model = getModel(modelName, searchStr);
-	const searchObj = (modelName === 'qp') ? {qp : {$in : [questionPaper]}} : getSearchObj(searchStr);
+	const searchObj = getSearchObj(modelName, searchStr);
 	try {
 	    const documents = await model.find(searchObj);
 	    return documents;
@@ -48,3 +51,5 @@ async function getDocuments(modelName, searchStr){
 	}
 }
 module.exports = getDocuments;
+module.exports.getModel = getModel;
+module.exports.getSearchObj = getSearchObj;
