@@ -9,12 +9,15 @@ router.get('/', function(req, res) {
 
 router.get('/ch/:id', function(req, res){
   const [chapter, subChapter, number] = req.params.id.split('.');
-  let searchObj = {chapter: Number.parseInt(chapter)};
+  let searchObj = {};
+  if(!!chapter){
+    searchObj.chapter = Number.parseInt(chapter);
+  }
   if(!!subChapter){
     searchObj.subChapter = Number.parseInt(subChapter);
-    if(!!number){
-      searchObj.number= Number.parseInt(number)
-    }
+  }
+  if(!!number){
+    searchObj.number= Number.parseInt(number)
   }
   noteModel.find(searchObj).then(function(documents){
     res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
