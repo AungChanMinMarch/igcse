@@ -181,7 +181,7 @@ const menuConfig = {
     loadIcons: true,
     custom: []
 }
-if(['physics', 'ch', 'cq', 'sq', 'pq', 'qp'].includes(endpoint) === false){
+if(['ch', 'cq', 'sq', 'pq'].includes(parts.pop())){
     menuConfig.custom.push(buildChapterMenu());
 }
 menuConfig.custom.push(buildMainMenu());
