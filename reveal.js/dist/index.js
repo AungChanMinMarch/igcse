@@ -72,8 +72,10 @@ const indexJSON = [{
   '6.7': 'Infrared radiation',
   '6.8': 'More about infrared radiation',
   '6.9': 'Thermal energy at work'
-}]
-const endpoint =location.pathname.split('/').pop();
+}];
+const parts = location.pathname.split('/')
+const lastpoint = parts.pop();
+const endpoint = (lastpoint !== '') ? lastpoint : parts.pop();
 function buildChapterMenu() {
   const chapter = endpoint.split('.')[0];
   const chapterJSON = indexJSON[chapter];
