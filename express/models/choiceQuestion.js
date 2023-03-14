@@ -4,18 +4,15 @@ const Schema = mongoose.Schema;
 const choice_questionSchema = new Schema({
 	chapter: {
 		type: Number,
-		required: true,
 		min: [1, 'chapter must be at least 1, got {VALUE}']
 		// max: [16, 'chapter must be at most 16, got {VALUE}']
 	},
 	subChapter: {
 		type: Number,
-		required: true,
 		min: [1, 'subchapter must be at least 1, got {VALUE}']
 	},
 	noteNumber: {
 		type: Number,
-		required: true
 	},
 	qp: [{ //question paper e.g. 22march1
 		type: String,
@@ -27,7 +24,7 @@ const choice_questionSchema = new Schema({
 		min: [1, 'choice_question number must be at least 1, got {VALUE}'],
 		max: [40, 'choice_question number must be at most 40, got {VALUE}']
 	}],
-	q: {
+	content: {
 		type: String,
 	},
 	choices: [{
