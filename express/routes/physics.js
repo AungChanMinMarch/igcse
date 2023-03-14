@@ -42,4 +42,25 @@ router.get('/sq/:id', responer(shortQuestionModel, true));
 router.get('/pq', responer(practicalQuestionModel, false));
 router.get('/pq/:id', responer(practicalQuestionModel, true));
 
+router.get('/qp/:id', function(req, res){
+  let myModel;
+  const questionPaper = req.params.id;
+  console.log(questionPaper)
+  const paperNumber = questionPaper[questionPaper.length -1];
+  if(paperNumber == '1' || paperNumber == '2'){
+    myModel = choiceQuestionModel;
+  }
+  else if(paperNumber == '3' || paperNumber == '4'){
+    myModel = shortQuestionModel;
+  }
+  else if(paperNumber == '5' || paperNumber == '6'){
+    myModel = practicalQuestionModel;
+  }
+  console.log(paperNumber)
+  myModel.find({ qp : { $in : [questionPaper] } }).then(function(documents){
+      res.render('index', {title: 'CIE PAST PAPER', documents: documents});
+    }).catch(function(err) {
+      console.log(err);
+    });
+})
 module.exports = router;
