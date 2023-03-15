@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./express/bin/www",
     "data": "node ./express/bin/data.js",
+    "data-save": "node ./express/bin/data-save.js",
     "data-help": "node ./express/bin/data-help.js"
   },
   "dependencies": {

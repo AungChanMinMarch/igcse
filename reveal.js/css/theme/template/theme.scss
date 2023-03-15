@@ -67,6 +67,10 @@
     }
 }
 
+// for radio input 
+.prevent-arrow-key-selection {
+  pointer-events: none;
+}
 /*********************************************
  * HEADERS
  *********************************************/

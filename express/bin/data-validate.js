@@ -7,7 +7,6 @@ function exit(message){
 function warn(warning){
     console.warn('\x1b[31m', warning, '\x1b[0m');
 }
-
 const args = process.argv.slice(2); // slice the first two elements which are not arguments
 if(args.length === 0){
     exit('please add a command line argument')
@@ -17,7 +16,7 @@ if(args.length > 1){
     warn('Only the first valid argument will be executed!!!!')
 }
 let configKey, configValue;
-const validKeys = ['ch', 'qp'];
+const validKeys = ['ch', 'cq', 'sq', 'pq', 'qp'];
 // Parse the command line arguments into the config object
 for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -36,6 +35,4 @@ for (let i = 0; i < args.length; i++) {
 if(!configKey || !configValue){
     exit('please add one valid command line argument')
 }
-
-
 module.exports = {configKey, configValue};

@@ -1,66 +1,78 @@
 var express = require('express');
 var router = express.Router();
-const path = require('path');
-const noteModel = require('../models/note.js');
-const choiceQuestionModel = require('../models/choiceQuestion.js');
-const shortQuestionModel = require('../models/shortQuestion.js');
-const practicalQuestionModel = require('../models/practicalQuestion.js');
-function buildSearchObj(paramStr){
-  const [chapter, subChapter, number] = paramStr.split('.');
-    let searchObj = { chapter : Number.parseInt(chapter)};
-    if(!!subChapter){
-      searchObj.subChapter = Number.parseInt(subChapter);
-    }
-    if(!!number){
-      searchObj.number= Number.parseInt(number)
-    }
-    return searchObj
-}
-function responer(model, hasSearchObj){
-  return function(req, res){
-    const searchObj = hasSearchObj ? buildSearchObj(req.params.id) : {}
-    model.find(searchObj).then(function(documents){
-      res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
-    }).catch(function(err) {
-      console.log(err);
-    });
-  }
-}
+const getDocuments = require('../utils/getDocuments.js');
+
 router.get('/', function(req, res) {
   res.render('index', {title: 'IGCSE PHYSICS', documents: []});
 });
 
-router.get('/ch', responer(noteModel, false));
-router.get('/ch/:id', responer(noteModel, true));
+router.get('/ch', function(req, res){
+    getDocuments('ch', '').then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+router.get('/ch/:id', function(req, res){
+    getDocuments('ch', req.params.id).then(function(documents){
+        console.log(documents)
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
 
-router.get('/cq', responer(choiceQuestionModel, false));
-router.get('/cq/:id', responer(choiceQuestionModel, true));
+router.get('/cq', function(req, res){
+    getDocuments('cq', '').then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+router.get('/cq/:id', function(req, res){
+    getDocuments('cq', req.params.id).then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
 
-router.get('/sq', responer(shortQuestionModel, false));
-router.get('/sq/:id', responer(shortQuestionModel, true));
+router.get('/sq', function(req, res){
+    getDocuments('sq', '').then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+router.get('/sq/:id', function(req, res){
+    getDocuments('sq', req.params.id).then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
 
-router.get('/pq', responer(practicalQuestionModel, false));
-router.get('/pq/:id', responer(practicalQuestionModel, true));
+router.get('/pq', function(req, res){
+    getDocuments('pq', '').then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+router.get('/pq/:id', function(req, res){
+    getDocuments('pq', req.params.id).then(function(documents){
+        res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
 
 router.get('/qp/:id', function(req, res){
-  let myModel;
-  const questionPaper = req.params.id;
-  console.log(questionPaper)
-  const paperNumber = questionPaper[questionPaper.length -1];
-  if(paperNumber == '1' || paperNumber == '2'){
-    myModel = choiceQuestionModel;
-  }
-  else if(paperNumber == '3' || paperNumber == '4'){
-    myModel = shortQuestionModel;
-  }
-  else if(paperNumber == '5' || paperNumber == '6'){
-    myModel = practicalQuestionModel;
-  }
-  console.log(paperNumber)
-  myModel.find({ qp : { $in : [questionPaper] } }).then(function(documents){
-      res.render('index', {title: 'CIE PAST PAPER', documents: documents});
+    getDocuments('qp', req.params.id).then(function(documents){
+        res.render('index', {title: 'CIE PAST PAPER', documents: documents});
     }).catch(function(err) {
-      console.log(err);
+        console.log(err);
     });
 })
+
 module.exports = router;

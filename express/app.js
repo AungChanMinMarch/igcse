@@ -21,9 +21,11 @@ app.use(cookieParser());
 app.use('/dist', express.static(path.join(__dirname, '../reveal.js/dist')));
 app.use('/plugin', express.static(path.join(__dirname, '../reveal.js/plugin')));
 app.use('/img', express.static(path.resolve(__dirname, '../img')));
-
 app.use('/', indexRouter);
 app.use('/physics', physicsRouter);
+app.get('/data', function(req, res) {
+  res.render('data', {title: 'IGCSE PHYSICS'});
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
