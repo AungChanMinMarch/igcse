@@ -291,3 +291,35 @@ Reveal.addEventListener('slidechanged', function (event) {
     resetSlideScrolling(event.previousSlide)
     handleSlideScrolling(event.currentSlide);
 });
+
+const radioInputs = document.querySelectorAll('input[type="radio"]');
+
+function handleRadioKeyDown(event) {
+  if (event.code === "ArrowUp" || event.code === "ArrowDown") {
+    event.preventDefault();
+  }
+}
+
+radioInputs.forEach((radio) => {
+  radio.addEventListener("keydown", handleRadioKeyDown);
+  radio.addEventListener("click", function () {
+    radio.blur();
+    radio.parentElement.classList.add("prevent-arrow-key-selection");
+  });
+  radio.addEventListener("blur", function () {
+    radio.parentElement.classList.remove("prevent-arrow-key-selection");
+  });
+});
+
+let choiceNumber = 0;
+const choices = ['A', 'B', 'C', 'D'];
+Array.from(document.querySelectorAll( '[data-choice-box]')).map(choiceBox=>{
+  Array.from(choiceBox.getElementsByTagName('label')).map((label,index)=>{
+    const id = choiceNumber+choices[index];
+    label.setAttribute('for', id);
+    label.querySelector('input').setAttribute('id', id);
+    label.querySelector('input').setAttribute('name', choiceNumber);
+    label.querySelector('input').setAttribute('value', choices[index]);
+  })
+  choiceNumber +=1;
+})
