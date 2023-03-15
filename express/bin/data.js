@@ -61,7 +61,7 @@ mongoose.connect(uri).then(()=>{
 });
 
 function loghow(input){
-    log('your input is ', input);
+    if(input)log('your input is ', input);
     console.log(`please press s key and enter to save`);
     console.log(`please press c key and enter to cancel`);
 }
