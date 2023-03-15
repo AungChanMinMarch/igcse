@@ -1,6 +1,18 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const questionPaperSchema = new Schema({
+	name: {
+		type: String,
+		required: true
+	},
+	number: [{
+		type: Number,
+		required: true,
+		min: [1, 'choice_question number must be at least 1, got {VALUE}'],
+		max: [40, 'choice_question number must be at most 40, got {VALUE}']
+	}]
+})
 const choice_questionSchema = new Schema({
 	chapter: {
 		type: Number,
@@ -14,26 +26,15 @@ const choice_questionSchema = new Schema({
 	noteNumber: {
 		type: Number,
 	},
-	qp: [{ //question paper e.g. 22march1
-		type: String,
+	paper: [{ //question paper e.g. 22march1
+		type: [questionPaperSchema],
 		required: true
-	}],
-	number: [{
-		type: Number,
-		// required: true, may not be paper 1 or 2
-		min: [1, 'choice_question number must be at least 1, got {VALUE}'],
-		max: [40, 'choice_question number must be at most 40, got {VALUE}']
 	}],
 	content: {
 		type: String,
 	},
-	choices: [{
-		type: Schema.Types.Mixed //may be string(mostly) or array(table)
-	}],
-	choice_ths: [String], //sometimes some choice is from table e.g.22march1 no.5
-	correctChoice : {
+	answer : {
 		type: Number,
-		required: true,
 		min: [0, 'chapter must be at least 0, got {VALUE}'],
 		max: [3, 'chapter must be at most 3, got {VALUE}']
 	}

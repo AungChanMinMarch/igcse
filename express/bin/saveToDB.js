@@ -6,8 +6,7 @@ const { getModel, getSearchObj } = require('../utils/getDocuments.js');
 
 function saveToDB(configKey, configValue){
     const myModel = getModel(configKey, configValue);
-    const defaultObj = (configKey === 'qp') ? {qp: [configValue]} : getSearchObj(configKey, configValue);
-
+    const defaultObj = (configKey === 'qp') ? {} : getSearchObj(configKey, configValue);
     let promises = [];
 
     const data = fs.readFileSync('temp.json');
@@ -31,23 +30,37 @@ function saveToDB(configKey, configValue){
                 return log('no need to update...')
             }
             log('updating...');
-            return promises.push(myModel.findByIdAndUpdate(dataId, {
+            const newDocs = {
                 ...defaultObj,
-                ...jsonData[dataId], 
+                ...oldDocs, 
                 content: newContent, 
-                number: i+1
-            }))
+            }
+            if(!!Object.keys(newDocs.paper)){
+                newDocs.paper.map((obj, index) => {
+                    if(obj.name === configValue) newDocs.paper[index].number = i+1
+                })
+            } else {
+                newDocs.paper = {
+                    name:configValue,
+                    number: i+1
+                }
+            }
+            log(newDocs)
+            return promises.push(myModel.findByIdAndUpdate(dataId, newDocs))
         }
-        const newId = $(el).attr('data-new-id');
+        const newId = $(el).attr('data-new-docs');
         if(!!newId){
             log('creating...')
-            $(el).removeAttr('data-new-id');
+            $(el).removeAttr('data-new-docs');
             let newDocs = new myModel({
                 ...defaultObj,
                 ...jsonData[newId],
                 content : minify($.html(el), {collapseWhitespace: true}),
-                number : i+1
             });
+            newDocs.paper = {
+                name:configValue,
+                number: i+1
+            }
             return promises.push(newDocs.save());
         }
     });   

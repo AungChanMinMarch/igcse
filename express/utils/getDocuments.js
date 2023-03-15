@@ -5,7 +5,7 @@ const practicalQuestionModel = require('../models/practicalQuestion.js');
 
 function getSearchObj(modelName, searchStr) {
 	if(modelName === 'qp'){
-		return {qp : {$in : [searchStr]}}
+		return {'paper.name' : searchStr} 
 	}
 	if(searchStr === ''){
 		return {};
