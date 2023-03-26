@@ -64,6 +64,25 @@ html.reveal-full-page {
 	}
 }
 
+.reveal .slides section .fragment.blank {
+  opacity: 1!important;
+  visibility: visible;
+  color: transparent;
+  border-bottom: 2px solid var(--r-main-color);
+  display: inline-block;
+  text-align: center;
+
+	/*without this high inline block in big blank*/
+	height: 1em !important;
+	overflow: hidden;
+  /*transition: width 1s ease;*/
+
+	&.visible {
+		color: var(--r-main-color);
+		display: inline !important;
+		/*width: var(--blank-width) !important;*/
+	}
+}
 .reveal .slides section .fragment.grow {
 	opacity: 1;
 	visibility: inherit;
