@@ -31,7 +31,7 @@ mongoose.connect(uri).then(()=>{
             $('section:not(section > section)').attr('data-db-id', id);
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
-                formattedHtml += prettier.format($.html('section'), { parser: 'html' });
+                formattedHtml += prettier.format($.html('section:not(section > section)'), { parser: 'html' });
                 process.stdout.write(`\rformat success index-${index} \n`);
             }catch{
                 formattedHtml += $.html('section');

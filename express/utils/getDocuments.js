@@ -39,11 +39,31 @@ function getModel(modelName, searchStr){
 		}
 	}
 }
+function createGetNumberFn(paperName) {
+	return function(paperArray){
+		for(let i=0, len = paperArray.length; i<len; i++){
+			if(paperArray[i].name === paperName)
+				return paperArray[i].number
+		}
+	}
+}
 async function getDocuments(modelName, searchStr){
 	const model = getModel(modelName, searchStr);
 	const searchObj = getSearchObj(modelName, searchStr);
 	try {
-	    const documents = await model.find(searchObj);
+	    let documents = await model.find(searchObj);
+	    if(modelName === 'ch')
+		    documents.sort(function(a, b) {
+		    	if(a.chapter !== b.chapter) return a.chapter - b.chapter;
+		    	if(a.subChapter !== b.subChapter) return a.subChapter - b.subChapter;
+				  return a.number - b.number;
+				});//try inside query
+		  else if(modelName === 'qp'){
+		  	const getNumber = createGetNumberFn(searchStr);
+		  	documents.sort(function(a,b){
+		  		return getNumber(a.paper) - getNumber(b.paper);
+		  	})
+		  }
 	    return documents;
 	} catch (error) {
 	    console.log('An error occurred:', error);
