@@ -43,7 +43,7 @@ function saveToDB(configKey, configValue){
     let number = 1;
     sections.each((i, el) => {
         const dataId = $(el).attr('data-db-id');
-        if(!!dataId && $(el).attr('data-action') === 'delete'){
+        if(!!dataId && $(el).attr('data-delete') !== undefined){
             log('deleting...');
             return promises.push(myModel.findByIdAndRemove(dataId))
         }
