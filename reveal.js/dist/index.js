@@ -261,14 +261,8 @@ const revealConfig = {
 	pointer: pointerConfig,
 	menu: menuConfig,
 	drawer: drawerConfig,
-	mathjax3: mathjax3Config, 
-	plugins: [ RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu ],
-    dependencies: [
-    	{
-    		src: '/plugin/external/deck_from_params.js', 
-    		// condition: function() { return !!document.querySelector('[data-external-replace], [data-external]'); } 
-    	}
-    ]
+	mathjax3: mathjax3Config,
+	plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu]
 }
 document.addEventListener('DOMContentLoaded', function(event) {
   Array.from(document.querySelectorAll('.fragmentBox > *')).map(function(fragment){
