@@ -148,7 +148,7 @@ const menuConfig = {
     side: 'left', //left or right
     width: '80%',// 'normal', 'wide', 'third', 'half', 'full', or any valid css length value
     numbers: "true",
-    titleSelector: 'h1, h2, h3, h4, h5, h6',
+    titleSelector: 'h1, h3, h5',
     useTextContentForMissingTitles: false,
     hideMissingTitles: 'true',
 
@@ -261,24 +261,37 @@ const revealConfig = {
 	pointer: pointerConfig,
 	menu: menuConfig,
 	drawer: drawerConfig,
-	mathjax3: mathjax3Config, 
-	plugins: [ RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu ],
-    dependencies: [
-    	{
-    		src: '/plugin/external/deck_from_params.js', 
-    		// condition: function() { return !!document.querySelector('[data-external-replace], [data-external]'); } 
-    	}
-    ]
+	mathjax3: mathjax3Config,
+	plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu]
 }
-
+document.addEventListener('DOMContentLoaded', function(event) {
+  Array.from(document.querySelectorAll('.fragmentBox > *')).map(function(fragment){
+    if(fragment.classList.contains('noFragment')){
+      return;
+    }
+    fragment.classList.add('fragment');
+  })
+    Array.from(document.querySelectorAll('.blank')).map(blank=>{
+      blank.classList.add('fragment');
+      blank.classList.add('custom');
+      // const span = document.createElement('span');
+      // span.textContent = blank.textContent;
+      // span.style.font = window.getComputedStyle(blank).font;
+      // document.body.appendChild(span);
+      // const textWidth = span.offsetWidth;
+      // document.body.removeChild(span);
+      // blank.style.setProperty('--blank-width', textWidth + 'px');
+      blank.style.width = '200px';
+    });
 Reveal.initialize(revealConfig)
+  });
 
 function resetSlideScrolling(slide) {
     slide?.classList.remove('scrollable-slide');
 }
 
 function handleSlideScrolling(slide) {
-    if (slide.clientHeight >= 800) {
+    if (slide.clientHeight >= 625) {
         slide.classList.add('scrollable-slide');
     }
 }

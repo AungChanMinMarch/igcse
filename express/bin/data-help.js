@@ -7,3 +7,5 @@ function logger(type, arg, egType, egArg){
 }
 log(logger('chapter', 'ch=<chapter number>', 'chapter 1.1', 'ch=1.1'));
 log(logger('question paper', 'qp=<year-Monthe-number>', '2022 March paper 1', 'qp=2022-March-1'));
+
+log(`To delete a document, add data-delete attribut to the document(section element in temp.html)`)

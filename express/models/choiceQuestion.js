@@ -27,7 +27,7 @@ const choice_questionSchema = new Schema({
 		type: Number,
 	},
 	paper: [{ //question paper e.g. 22march1
-		type: [questionPaperSchema],
+		type: questionPaperSchema,
 		required: true
 	}],
 	content: {

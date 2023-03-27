@@ -14,6 +14,52 @@
  * GLOBAL STYLES
  *********************************************/
 
+.choice-table {
+  display: table;
+  width: 90%;
+	border: 1px solid var(--r-main-color);
+	border-collapse: collapse;
+}
+.choice-tr {
+  display: table-row;
+}
+.choice-td {
+  display: table-cell;
+  padding: 10px;
+}
+.choice-tr:first-child >.choice-td {
+  border-bottom: 1px solid var(--r-main-color);
+}
+.choice-tr > .choice-td {
+  border-left: 1px solid var(--r-main-color);
+  border-right: 1px solid var(--r-main-color);
+}
+
+label{
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+label:nth-of-type(1):before {
+	content: "A";
+	margin-right: 5px;
+}
+label:nth-of-type(2):before {
+	content: "B";
+	margin-right: 5px;
+}
+label:nth-of-type(3):before {
+	content: "C";
+	margin-right: 5px;
+}
+label:nth-of-type(4):before {
+	content: "D";
+	margin-right: 5px;
+}
+p, label{
+	text-align: left ;
+}
+
 html.reveal-full-page {
 	width: 100%;
 	height: 100%;
@@ -64,6 +110,27 @@ html.reveal-full-page {
 	}
 }
 
+.reveal .slides section .fragment.blank {
+  opacity: 1!important;
+  visibility: visible;
+  color: transparent;
+  border-bottom: 2px solid var(--r-main-color);
+  display: inline-block;
+  text-align: center;
+  
+  user-select: none;/*this stop showing answer when selecting a blank*/
+
+	/*without this high inline block in big blank*/
+	height: 1em !important;
+	overflow: hidden;
+  /*transition: width 1s ease;*/
+
+	&.visible {
+		color: var(--r-main-color);
+		display: inline !important;
+		/*width: var(--blank-width) !important;*/
+	}
+}
 .reveal .slides section .fragment.grow {
 	opacity: 1;
 	visibility: inherit;

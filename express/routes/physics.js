@@ -15,7 +15,6 @@ router.get('/ch', function(req, res){
 });
 router.get('/ch/:id', function(req, res){
     getDocuments('ch', req.params.id).then(function(documents){
-        console.log(documents)
         res.render('index', {title: 'IGCSE PHYSICS', documents: documents});
     }).catch(function(err) {
         console.log(err);

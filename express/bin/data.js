@@ -12,7 +12,6 @@ const mongoose = require('mongoose');
 const cheerio = require('cheerio');
 
 const getDocuments = require('../utils/getDocuments.js');
-const saveToDB = require('./saveToDB.js');
 
 process.stdout.write('connecting to MongoDB')
 mongoose.connect(uri).then(()=>{
@@ -32,7 +31,7 @@ mongoose.connect(uri).then(()=>{
             $('section:not(section > section)').attr('data-db-id', id);
             process.stdout.write(`formatting index -  ${index}...................`);
             try {
-                formattedHtml += prettier.format($.html('section'), { parser: 'html' });
+                formattedHtml += prettier.format($.html('section:not(section > section)'), { parser: 'html' });
                 process.stdout.write(`\rformat success index-${index} \n`);
             }catch{
                 formattedHtml += $.html('section');
@@ -45,27 +44,6 @@ mongoose.connect(uri).then(()=>{
         log('written json');
         fs.writeFileSync('temp.html', formattedHtml)
         log('written html');
-        loghow();
-        process.stdin.setEncoding('utf8');
-        process.stdin.on('data', (input) => {
-            input = input.trim();
-            if(input == 's'){
-                saveToDB(configKey, configValue);
-            }
-            else if(input == 'c'){
-                cancel()
-            }
-            else loghow(input);
-        });
+        process.exit(1);
     })
 });
-
-function loghow(input){
-    if(input)log('your input is ', input);
-    console.log(`please press s key and enter to save`);
-    console.log(`please press c key and enter to cancel`);
-}
-function cancel(){
-    log('canceling');
-    process.exit(1); // terminate with exit code 1 (optional)
-}
