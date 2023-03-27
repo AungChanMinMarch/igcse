@@ -71,6 +71,8 @@ html.reveal-full-page {
   border-bottom: 2px solid var(--r-main-color);
   display: inline-block;
   text-align: center;
+  
+  user-select: none;/*this stop showing answer when selecting a blank*/
 
 	/*without this high inline block in big blank*/
 	height: 1em !important;
