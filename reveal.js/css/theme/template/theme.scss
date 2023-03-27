@@ -72,6 +72,20 @@
 .prevent-arrow-key-selection {
   pointer-events: none;
 }
+
+.fbox{
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+}
+.v.fbox{
+	flex-direction: column;
+	align-items: flex-start;
+}
+.gbox {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
 /*********************************************
  * HEADERS
  *********************************************/
