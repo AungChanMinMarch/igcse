@@ -99,15 +99,36 @@ html * {
   table-layout: fixed;
   width: 100%;
   text-align: left;
+  border-bottom: 1px solid var(--r-main-color);
 }
 .multiCol .col {
   display: table-cell;
   vertical-align: top;
   width: 50%;
-  padding: 2% 0 2% 3%;
+  padding: 4% 6% 4% 6%;
 }
 .multiCol .col:first-of-type {
   padding-left: 0;
+}
+
+.prevent-arrow-key-selection {
+  pointer-events: none;
+}
+
+.fbox {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.v.fbox {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.gbox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 /*********************************************
