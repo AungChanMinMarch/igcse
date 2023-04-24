@@ -100,11 +100,10 @@
 .noTransform{
 	text-transform: none !important;
 }
-img {
-  filter: invert(var(--invert)) sepia(var(--sepia)) saturate(var(--saturate)) hue-rotate(var(--hue-rotate)) brightness(var(--brightness)) contrast(var(--contrast));
+img { 
+	filter: #{"invert(var(--invert)) sepia(var(--sepia)) saturate(var(--saturate)) hue-rotate(var(--hue-rotate)) brightness(var(--brightness)) contrast(var(--contrast))"};
 /*  mix-blend-mode: color;*/
 }
-
 /*********************************************
  * HEADERS
  *********************************************/
