@@ -1,3 +1,5 @@
+const log = console.log;
+
 function shuffle(){
 	location.hash = "";
 
@@ -157,18 +159,21 @@ const menuConfig = {
     // to hide the markers.
     markers: false,
     themes: [
+        { name: 'Beige', theme: '/dist/theme/beige.css' },
+        { name: 'Black-contrast', theme: '/dist/theme/black-contrast.css' },
         { name: 'Black', theme: '/dist/theme/black.css' },
-        { name: 'White', theme: '/dist/theme/white.css' },
+        { name: 'Blood', theme: '/dist/theme/blood.css' },
+        { name: 'Dracula', theme: '/dist/theme/dracula.css' },
         { name: 'League', theme: '/dist/theme/league.css' },
-        {
-          name: 'Dark',
-          theme: '/dist/theme/black.css',
-          highlightTheme: '/plugin/highlight/monokai.css'
-        },
-        {
-          name: 'Code: Zenburn',
-          highlightTheme: '/plugin/highlight/zenburn.css'
-        }
+        { name: 'Moon', theme: '/dist/theme/moon.css' },
+        { name: 'Night', theme: '/dist/theme/night.css' },
+        { name: 'Serif', theme: '/dist/theme/serif.css' },
+        { name: 'Simple', theme: '/dist/theme/simple.css' },
+        { name: 'Sky', theme: '/dist/theme/sky.css' },
+        { name: 'Solarized', theme: '/dist/theme/solarized.css' },
+        { name: 'White', theme: '/dist/theme/white.css' },
+        { name: 'White-contrast', theme: '/dist/theme/white-contrast.css' },
+        { name: 'White_contrast_compact_verbatim_headers', theme: '/dist/theme/white_contrast_compact_verbatim_headers.css' },
     ],
     transitions: true,
     openButton: true,
@@ -264,6 +269,29 @@ const revealConfig = {
 	mathjax3: mathjax3Config,
 	plugins: [RevealMath.MathJax3, RevealHighlight, RevealNotes, RevealPointer, RevealDrawer, RevealMenu]
 }
+// $(document.ready(() => {
+//   $('button.execute').click(() => {
+   
+
+
+
+//     let lossMsg;
+//     if (result.loss < 1) {
+//       lossMsg = 'This is a perfect result.';
+//     } else if (result.loss < 5) {
+//       lossMsg = 'The is close enough.';
+//     } else if (result.loss < 15) {
+//       lossMsg = 'The color is somewhat off. Consider running it again.';
+//     } else {
+//       lossMsg = 'The color is extremely off. Run it again!';
+//     }
+
+//     $('.realPixel').css('background-color', color.toString());
+//     $('.filterPixel').attr('style', result.filter);
+//     $('.filterDetail').text(result.filter);
+//     $('.lossDetail').html(`Loss: ${result.loss.toFixed(1)}. <b>${lossMsg}</b>`);
+//   });
+// });
 document.addEventListener('DOMContentLoaded', function(event) {
   Array.from(document.querySelectorAll('.fragmentBox > *')).map(function(fragment){
     if(fragment.classList.contains('noFragment')){
@@ -283,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
       // blank.style.setProperty('--blank-width', textWidth + 'px');
       blank.style.width = '200px';
     });
-Reveal.initialize(revealConfig)
+    Reveal.initialize(revealConfig)
   });
 
 function resetSlideScrolling(slide) {
@@ -326,13 +354,17 @@ radioInputs.forEach((radio) => {
 
 let choiceNumber = 0;
 const choices = ['A', 'B', 'C', 'D'];
+const inputEl = document.createElement("input");
+inputEl.setAttribute("type", "radio")
 Array.from(document.querySelectorAll( '[data-choice-box]')).map(choiceBox=>{
   Array.from(choiceBox.getElementsByTagName('label')).map((label,index)=>{
     const id = choiceNumber+choices[index];
     label.setAttribute('for', id);
-    label.querySelector('input').setAttribute('id', id);
-    label.querySelector('input').setAttribute('name', choiceNumber);
-    label.querySelector('input').setAttribute('value', choices[index]);
+    const input = inputEl.cloneNode(false);
+    label.insertBefore(input, label.firstChild);
+    input.setAttribute('id', id);
+    input.setAttribute('name', choiceNumber);
+    input.setAttribute('value', choices[index]);
   })
   choiceNumber +=1;
 })

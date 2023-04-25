@@ -39,6 +39,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-link-color-hover: #6ca0e8;
   --r-selection-background-color: #98bdef;
   --r-selection-color: #fff;
+  --number-of-col: 2;
 }
 
 .reveal-viewport {
@@ -123,11 +124,32 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
 .v.fbox {
   flex-direction: column;
   align-items: flex-start;
+  gap: 30px;
 }
 
 .gbox {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(var(--number-of-col), 1fr);
+  gap: 10px 25px;
+  align-items: stretch;
+}
+
+.gbox > * {
+  padding: 3% 5% 6% 5%;
+  border-bottom: 1px solid;
+}
+
+.grow {
+  grid-column: 1/span var(--number-of-col);
+}
+
+.noTransform {
+  text-transform: none !important;
+}
+
+img {
+  filter: invert(var(--invert)) sepia(var(--sepia)) saturate(var(--saturate)) hue-rotate(var(--hue-rotate)) brightness(var(--brightness)) contrast(var(--contrast));
+  /*  mix-blend-mode: color;*/
 }
 
 /*********************************************
