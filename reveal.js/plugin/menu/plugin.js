@@ -3,7 +3,7 @@
  * MIT licensed
  * (c) Greg Denehy 2020
  */
-
+import changeImgColor from "./changeImgColor.js"
 const Plugin = () => {
   const ieVersion = (function () {
     let browser = /(msie) ([\w.]+)/.exec(
@@ -605,6 +605,7 @@ const Plugin = () => {
     var element = select('.slide-menu');
     element.style.fontFamily = revealStyle.fontFamily;
     //XXX could adjust the complete menu style to match the theme, ie colors, etc
+    changeImgColor();
   }
 
   var buttons = 0;
@@ -1136,17 +1137,20 @@ const Plugin = () => {
   function changeStylesheet(id, href) {
     // take note of the previous theme and remove it, then create a new stylesheet reference and insert it
     // this is required to force a load event so we can change the menu style to match the new style
-    var stylesheet = select('link#' + id);
-    var parent = stylesheet.parentElement;
-    var sibling = stylesheet.nextElementSibling;
-    stylesheet.remove();
+    const stylesheet = select('link#' + id);
+    const parent = stylesheet.parentElement;
+    const sibling = stylesheet.nextElementSibling;
 
-    var newStylesheet = stylesheet.cloneNode();
+    const newStylesheet = stylesheet.cloneNode();
     newStylesheet.setAttribute('href', href);
+    parent.insertBefore(newStylesheet, sibling);
     newStylesheet.onload = function () {
       matchRevealStyle();
+      stylesheet.remove();
     };
-    parent.insertBefore(newStylesheet, sibling);
+    newStylesheet.onerror = function(){
+      newStylesheet.remove();
+    }
   }
 
   // modified from math plugin

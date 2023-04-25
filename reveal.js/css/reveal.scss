@@ -23,14 +23,14 @@
 .choice-tr {
   display: table-row;
 }
-.choice-td {
+.choice-tr > * {
   display: table-cell;
   padding: 10px;
 }
-.choice-tr:first-child >.choice-td {
+.choice-tr:first-child > * {
   border-bottom: 1px solid var(--r-main-color);
 }
-.choice-tr > .choice-td {
+.choice-tr > * {
   border-left: 1px solid var(--r-main-color);
   border-right: 1px solid var(--r-main-color);
 }
@@ -39,6 +39,13 @@ label{
 	display: block;
 	margin: 0;
 	padding: 0;
+}
+label:is(>img) {
+  display: flex;
+  flex-direction: column;
+}
+label:is(>img):before {
+	text-align: center;
 }
 label:nth-of-type(1):before {
 	content: "A";
@@ -128,6 +135,7 @@ html.reveal-full-page {
 	&.visible {
 		color: var(--r-main-color);
 		display: inline !important;
+		user-select: auto;
 		/*width: var(--blank-width) !important;*/
 	}
 }

@@ -52,6 +52,7 @@ function saveToDB(configKey, configValue){
             let oldDocs = jsonData[dataId];
             const newContent = minify($.html(el), {collapseWhitespace: true})
             if(oldDocs.number == number && oldDocs.content == newContent){
+                number +=1;
                 return log('no need to update...')
             }
             log('updating...');
