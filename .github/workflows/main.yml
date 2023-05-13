@@ -19,4 +19,4 @@ jobs:
         run: npm install mongoose
 
       - name: Run Node.js file
-        run: node build/index.js ${{ secrets.DB_URI }} hello
+        run: node build/index.js ${{ secrets.DB_URI }} 'hello'
