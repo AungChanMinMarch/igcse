@@ -25,7 +25,7 @@ jobs:
         id: query
         uses: mongodb/mongo-query@v1
         with:
-          uri: mongodb+srv://<username>:<password>@cluster0.mongodb.net/mydatabase
+          uri: ${{ secrets.DB_URI }}
           database: mydatabase
           query: |
             db.collection.find().toArray()
