@@ -1,28 +1,22 @@
 name: Create HTML files with MongoDB Data
+
+
 on:
   push:
     branches:
       - main
       # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
 jobs:
-  render:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Query MongoDB
-        id: query
-        uses: mongodb/mongo-query@v1
-        with:
-          uri: ${{ secrets.DB_URI }}
-          database: mydatabase
-          query: |
-            db.collection.find().toArray()
+      - name: Install dependencies
+        run: npm install
 
-      - name: Render HTML
-        run: |
-          node -e "console.log(JSON.parse(process.env.QUERY_RESULT))"
-        env:
-          QUERY_RESULT: ${{ steps.query.outputs.result }}
+      - name: Run Node.js file
+        run: node build/index.js ${{ secrets.DB_URI }} hello
